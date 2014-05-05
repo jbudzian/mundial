@@ -1,0 +1,13 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+	<aside class="span4">
+		<section>
+			<h1>
+				<%= image_tag @user.gravatar_url(
+					:default => "http://png.findicons.com/files/icons/175/halloween_avatar/80/alien.png",
+					:size => 80) %>
+				<%= @user.name %>
+			</h1>
+		</section>
+	</aside>
+</div>
