@@ -10,10 +10,11 @@
 #
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessor :current_place
   include Gravtastic
   gravtastic
   has_secure_password
-
+  
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
@@ -22,6 +23,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def current_score
+    if @current_score.nil?
+      @current_score = rand(55)
+    end
+    @current_score
+  end
   
 private
 

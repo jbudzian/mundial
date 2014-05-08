@@ -1,0 +1,13 @@
+<% provide(:title, 'Leaderboard') %>
+<h1>Leaderboard</h1>
+
+<ul class="leaderboard">
+  <% @users.each do |user| %>
+    <li>
+      	<%= gravatar_for user, 48 %>
+    	<%= content_tag(:span, user.current_place, class: "place") %>
+      	<%= content_tag(:span, "#{user.current_score} point(s)   ") %>
+      	<%= link_to user.name, user %>
+    </li>
+  <% end %>
+</ul>
