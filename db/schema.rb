@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140508181309) do
+ActiveRecord::Schema.define(:version => 20140509135259) do
+
+  create_table "matches", :force => true do |t|
+    t.string   "tournament_stage"
+    t.integer  "match_no"
+    t.datetime "match_date"
+    t.integer  "home_team_id",     :null => false
+    t.string   "away_team_id",     :null => false
+    t.string   "venue"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.string   "group"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "placeholder", :default => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

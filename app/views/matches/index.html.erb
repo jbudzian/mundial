@@ -1,0 +1,30 @@
+<% provide(:title, 'Matches') %> <h1>Matches</h1>
+<table class="matches">
+	<% @matches.group_by(&:tournament_stage).each do |stage, stage_matches| %>
+	<tr><%= content_tag(:td, content_tag(:a, stage, id: stage.gsub(/\s+/, ""), style: "padding-top: 50px; margin-top: -50px; text-decoration: none; color: black;"), class: "stage_name", colspan: "8") %></tr>
+	<% if !stage_matches.nil? %>
+		<tr>
+			<th>Match No</th>
+			<th>Date</th>
+			<th>Home Team</th>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
+			<th>Away Team</th>
+			<th></th>
+		</tr>
+		<% stage_matches.sort_by {|match| match.match_no}.each do |match| %>
+			<tr>
+				<%= content_tag(:td, match.match_no) %>
+				<%= content_tag(:td, match.match_date.in_time_zone('Europe/Warsaw').to_formatted_s(:short)) %>
+				<%= content_tag(:td, match.home_team.name, class: "home_team") %>
+				<%= content_tag(:td, '0') %>
+				<%= content_tag(:td, ':') %>
+				<%= content_tag(:td, '0') %>
+				<%= content_tag(:td, match.away_team.name, class: "away_team") %>
+				<%= content_tag(:td, link_to("Edit", edit_match_path(match)), class: "btn btn-default btn-xs") %>
+			</tr>
+		<% end %>
+	<% end %>
+	<% end %>
+</table>

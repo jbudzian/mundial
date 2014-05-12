@@ -1,0 +1,13 @@
+<% provide(:title, 'Teams') %> <h1>Teams</h1>
+<table class="teams">
+	<% @teams.group_by(&:group).each do |group, group_teams| %>
+	<tr>
+		<td class="group_name"><%= link_to group, matches_path(anchor: group.gsub(/\s+/, "")) %></td>
+		<% if !group_teams.nil? %>
+			<% group_teams.each do |team| %>
+				<%= content_tag(:td, team.name, class: "team_name") %>
+			<% end %>
+		<% end %>
+	</tr>
+	<% end %>
+</table>

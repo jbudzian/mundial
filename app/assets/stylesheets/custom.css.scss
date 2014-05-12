@@ -175,3 +175,57 @@ input, textarea, select, .uneditable-input {
     text-shadow: 5px 5px 5px gold;
   }
 }
+
+/* teams index */
+.teams {
+  table {
+    border-collapse: collapse;
+    border-style:solid;
+    cell-padding: 40;
+  }
+  td.group_name {
+    padding: 10px;
+    font-weight: bolder;
+    width: 20%;
+    //border-bottom: 3px solid teal;
+    //border-right: 1px solid teal;
+  }
+  td.team_name {
+    padding: 10px;
+    width: 20%;
+    //border-bottom: 3px solid teal;
+    //border-right: 1px solid teal;
+  }
+}
+
+
+/* matches index */
+.matches {
+  table {
+    border-collapse: collapse;
+    border-style: solid;
+    cell-padding: 5;
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  td.stage_name {
+    padding: 10px 0px;
+    font-weight: bolder;
+    background-color: #99FF33;
+    //border-bottom: 3px solid teal;
+    //border-right: 1px solid teal;
+  }
+  td.home_team {
+    padding: 5px;
+    text-align: right;
+    //border-bottom: 3px solid teal;
+    //border-right: 1px solid teal;
+  }
+  td.away_team {
+    padding: 5px;
+    text-align: left;
+    //border-bottom: 3px solid teal;
+    //border-right: 1px solid teal;
+  }
+}
+
