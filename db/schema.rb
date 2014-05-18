@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140509135259) do
+ActiveRecord::Schema.define(:version => 20140517004046) do
+
+  create_table "bets", :force => true do |t|
+    t.integer  "home_team_goals_90mins"
+    t.integer  "away_team_goals_90mins"
+    t.integer  "result_90mins"
+    t.boolean  "home_team_eliminated"
+    t.integer  "match_id",               :null => false
+    t.integer  "user_id",                :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "bets", ["match_id"], :name => "index_bets_on_match_id"
+  add_index "bets", ["user_id"], :name => "index_bets_on_user_id"
 
   create_table "matches", :force => true do |t|
     t.string   "tournament_stage"
@@ -22,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20140509135259) do
     t.string   "venue"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.boolean  "is_playoff"
   end
 
   create_table "teams", :force => true do |t|

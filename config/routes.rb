@@ -3,6 +3,7 @@ Mundial::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :teams, only: [:index]
   resources :matches, only: [:index, :edit, :update]
+  resources :bets, only: [:new, :create, :edit, :update]
 
   root to: 'static_pages#home'
   

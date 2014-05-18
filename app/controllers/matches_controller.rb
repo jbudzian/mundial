@@ -1,4 +1,6 @@
 class MatchesController < ApplicationController
+  include AuthHelper
+  
   before_filter :ensure_signed_in_user, only: [:index, :edit, :update]
   before_filter :ensure_admin_user, only: [:edit, :update]
   
@@ -27,14 +29,4 @@ class MatchesController < ApplicationController
     end
   end
 
-  private
-  
-  def ensure_signed_in_user
-    redirect_to signin_path, notice: "Please sign in." unless signed_in?
-  end
-
-  def ensure_admin_user
-    redirect_to(root_path) unless current_user.admin?
-  end
-  
 end

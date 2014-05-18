@@ -63,5 +63,7 @@ module Mundial
     config.assets.version = '1.0'
     
     config.i18n.enforce_available_locales = false
+    
+    config.time_zone = 'Europe/Warsaw'
   end
 end

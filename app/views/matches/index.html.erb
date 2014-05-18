@@ -1,30 +1,44 @@
 <% provide(:title, 'Matches') %> <h1>Matches</h1>
-<table class="matches">
+<div class="center-block">
+<table class="table table-hover">
 	<% @matches.group_by(&:tournament_stage).each do |stage, stage_matches| %>
-	<tr><%= content_tag(:td, content_tag(:a, stage, id: stage.gsub(/\s+/, ""), style: "padding-top: 50px; margin-top: -50px; text-decoration: none; color: black;"), class: "stage_name", colspan: "8") %></tr>
+	<tr><%= content_tag(:td,
+			  content_tag(:a,
+			  	stage, 
+			  	id: stage.gsub(/\s+/, ""), 
+			  	style: "padding-top: 50px; margin-top: -50px; text-decoration: none; color: white;"), 
+			  colspan: "9", 
+			  class: "stage_name") %></tr>
 	<% if !stage_matches.nil? %>
 		<tr>
 			<th>Match No</th>
 			<th>Date</th>
-			<th>Home Team</th>
+			<th class="home_team">Home Team</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 			<th>Away Team</th>
+			<th></th>
 			<th></th>
 		</tr>
 		<% stage_matches.sort_by {|match| match.match_no}.each do |match| %>
 			<tr>
 				<%= content_tag(:td, match.match_no) %>
 				<%= content_tag(:td, match.match_date.in_time_zone('Europe/Warsaw').to_formatted_s(:short)) %>
-				<%= content_tag(:td, match.home_team.name, class: "home_team") %>
-				<%= content_tag(:td, '0') %>
-				<%= content_tag(:td, ':') %>
-				<%= content_tag(:td, '0') %>
-				<%= content_tag(:td, match.away_team.name, class: "away_team") %>
-				<%= content_tag(:td, link_to("Edit", edit_match_path(match)), class: "btn btn-default btn-xs") %>
+				<%= content_tag(:td, match.home_team.name, class: "home_team home_team_win") %>
+				<%= content_tag(:td, '0', class: "result") %>
+				<%= content_tag(:td, ':', class: "result") %>
+				<%= content_tag(:td, '0', class: "result") %>
+				<%= content_tag(:td, match.away_team.name, class: "away_team away_team_win") %>
+				<% if current_user.admin? %>
+					<%= content_tag(:td, link_to("Edit match", edit_match_path(match), class: "btn btn-default btn-small")) %>
+				<% else %>
+					<%= content_tag(:td, '') %>
+				<% end %>
+				<%= content_tag(:td, link_to("My bet", edit_bet_path(match), class: "btn btn-default btn-small")) %>
 			</tr>
 		<% end %>
 	<% end %>
 	<% end %>
 </table>
+</div>

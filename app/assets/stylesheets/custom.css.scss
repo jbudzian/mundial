@@ -1,5 +1,11 @@
 @import "bootstrap";
 
+/* colors */
+$sollersGreen: #7aa01c;
+$sollersBlue1: #72afe5;
+$sollersBlue2: #2b69ad;
+$sollersBlue3: #294d7a;
+
 html {
   overflow-y: scroll;
 }
@@ -200,32 +206,56 @@ input, textarea, select, .uneditable-input {
 
 
 /* matches index */
-.matches {
-  table {
-    border-collapse: collapse;
-    border-style: solid;
-    cell-padding: 5;
-    margin-left:auto; 
-    margin-right:auto;
-  }
+.table {
+  // table {
+    // border-collapse: collapse;
+    // border-style: solid;
+    // cell-padding: 5;
+    // margin-left:auto; 
+    // margin-right:auto;
+  // }
   td.stage_name {
-    padding: 10px 0px;
+    padding: 10px 50px;
     font-weight: bolder;
-    background-color: #99FF33;
+    background-color: $sollersBlue3;
+    font-size: large;
+    text-align: center;
+    letter-spacing: 2px;
     //border-bottom: 3px solid teal;
     //border-right: 1px solid teal;
   }
-  td.home_team {
+  td, th {
     padding: 5px;
-    text-align: right;
+    vertical-align: middle;
     //border-bottom: 3px solid teal;
     //border-right: 1px solid teal;
+    &.home_team {
+      text-align: right;
+      font-weight: bolder;
+    }
+    &.home_team_win {
+      background-image: url('home_team_win_bg.png');
+      background-repeat: no-repeat;
+      background-position: left center;
+    }
+    &.away_team {
+      font-weight: bolder;
+    }
+    &.away_team_win {
+      background-image: url('away_team_win_bg.png');
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+    &.result {
+      text-align: center;
+    }
   }
-  td.away_team {
-    padding: 5px;
-    text-align: left;
-    //border-bottom: 3px solid teal;
-    //border-right: 1px solid teal;
-  }
+// 
+  // td.away_team {
+    // padding: 5px;
+    // text-align: left;
+    // //border-bottom: 3px solid teal;
+    // //border-right: 1px solid teal;
+  // }
 }
 

@@ -1,0 +1,17 @@
+
+home_team_goals_90mins : integer
+away_team_goals_90mins : integer
+result_90mins : integer (ResultType)
+home_team_eliminated : boolean
+
+
+rails generate model Bet home_team_goals_90mins:integer away_team_goals_90mins:integer result_90mins:integer home_team_eliminated:boolean
+
+		<%= form_for @bet do |f| %>
+		<%= render 'bet_fields', f: f%>
+		<%= f.submit "Submit bet", class: "btn btn-large btn-primary" %>
+		<% end %>
+
+rails generate migration add_playoff_to_matches is_playoff:boolean
+
+rails generate model Result match_id:integer

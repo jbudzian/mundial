@@ -1,0 +1,19 @@
+<%= f.label :away_team_goals_90mins, "#{locals[:match].away_team.name} - goals after 90 minutes" %>
+<%= f.text_field :away_team_goals_90mins %>
+<%= f.label :home_team_goals_90mins, "#{locals[:match].home_team.name} - goals after 90 minutes" %>
+<%= f.text_field :home_team_goals_90mins %>
+<%= f.label :result_90mins, "Result after 90 minutes" %>
+<%= f.select :result_90mins, options_for_select(
+	[
+		["Draw", ApplicationHelper::DRAW],
+		[locals[:match].home_team.name, ApplicationHelper::HOME_TEAM_WIN],
+		[locals[:match].away_team.name, ApplicationHelper::AWAY_TEAM_WIN]
+	], f.object.result_90mins), :autocomplete => "off" %>
+<% if locals[:match].is_playoff? %>
+	<%= f.label :home_team_eliminated, "Team to Advance" %>
+	<%= f.select :home_team_eliminated, options_for_select(
+		[
+			["#{locals[:match].home_team.name} goes through", false],
+			["#{locals[:match].away_team.name} goes through", true]
+		]) %>
+<% end %>

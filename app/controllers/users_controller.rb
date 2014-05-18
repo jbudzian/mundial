@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include AuthHelper
+  
   before_filter :ensure_signed_in_user, only: [:index, :edit, :update]
   before_filter :ensure_correct_user, only: [:edit, :update]
   
@@ -51,10 +53,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def ensure_signed_in_user
-    redirect_to signin_path, notice: "Please sign in." unless signed_in?
-  end
 
   def ensure_correct_user
     @user = User.find(params[:id])
