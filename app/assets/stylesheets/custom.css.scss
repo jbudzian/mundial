@@ -224,6 +224,9 @@ input, textarea, select, .uneditable-input {
     //border-bottom: 3px solid teal;
     //border-right: 1px solid teal;
   }
+  th {
+    color: $sollersGreen;
+  }
   td, th {
     padding: 5px;
     vertical-align: middle;
@@ -238,6 +241,11 @@ input, textarea, select, .uneditable-input {
       background-repeat: no-repeat;
       background-position: left center;
     }
+    &.home_team_draw {
+      background-image: url('home_team_draw_bg.png');
+      background-repeat: no-repeat;
+      background-position: left center;
+    }
     &.away_team {
       font-weight: bolder;
     }
@@ -246,8 +254,17 @@ input, textarea, select, .uneditable-input {
       background-repeat: no-repeat;
       background-position: right center;
     }
+    &.away_team_draw {
+      background-image: url('away_team_draw_bg.png');
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
     &.result {
       text-align: center;
+    }
+    &.button-col {
+      padding: 0px 0px 0px 5px;
+      text-align: right;
     }
   }
 // 

@@ -1,0 +1,19 @@
+<%= f.label :away_team_goals_90mins, "#{locals[:match].away_team.name} - goals after 90 minutes" %>
+<%= f.text_field :away_team_goals_90mins %>
+<%= f.label :home_team_goals_90mins, "#{locals[:match].home_team.name} - goals after 90 minutes" %>
+<%= f.text_field :home_team_goals_90mins %>
+<%= f.label :result_full_time, "Match result" %>
+<% if locals[:match].is_playoff? %>
+	<%= f.select :result_full_time, options_for_select(
+	[
+		[locals[:match].home_team.name, ApplicationHelper::HOME_TEAM_WIN],
+		[locals[:match].away_team.name, ApplicationHelper::AWAY_TEAM_WIN]
+	], f.object.result_full_time), :autocomplete => "off" %>
+<% else %>
+	<%= f.select :result_full_time, options_for_select(
+	[
+		["Draw", ApplicationHelper::DRAW],
+		[locals[:match].home_team.name, ApplicationHelper::HOME_TEAM_WIN],
+		[locals[:match].away_team.name, ApplicationHelper::AWAY_TEAM_WIN]
+	], f.object.result_full_time), :autocomplete => "off" %>
+<% end %>
