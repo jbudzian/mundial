@@ -20,3 +20,15 @@ rails generate model Bet home_team_goals_90mins:integer away_team_goals_90mins:i
 
 rails generate controller Results new
 
+you can run heroku run rake assets:clean or heroku run rake assets:precompile
+
+heroku restart
+
+git add .
+git commit -m "Finish user signup"
+git checkout master
+git merge sign-up
+
+git commit -a -m "Add SSL in production"
+git push heroku
+
