@@ -32,3 +32,10 @@ git merge sign-up
 git commit -a -m "Add SSL in production"
 git push heroku
 
+heroku run rake db:migrate
+heroku open
+heroku logs
+
+heroku run rake assets:reset
+heroku run rake assets:precompile
+
