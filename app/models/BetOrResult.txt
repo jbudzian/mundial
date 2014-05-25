@@ -22,7 +22,11 @@ rails generate controller Results new
 
 you can run heroku run rake assets:clean or heroku run rake assets:precompile
 
-heroku restart
+bundle install
+bundle exec rspec spec/
+bundle exec rake db:migrate
+bundle exec rake db:test:prepare
+bundle exec rake assets:precompile
 
 git add .
 git commit -m "Finish user signup"
@@ -31,6 +35,8 @@ git merge sign-up
 
 git commit -a -m "Add SSL in production"
 git push heroku
+
+heroku restart
 
 heroku run rake db:migrate
 heroku open

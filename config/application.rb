@@ -66,5 +66,6 @@ module Mundial
     
     config.time_zone = 'Europe/Warsaw'
     config.active_record.default_timezone = :local
+    ActiveRecord::Base.time_zone_aware_attributes = true
   end
 end
