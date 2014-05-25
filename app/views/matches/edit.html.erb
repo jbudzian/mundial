@@ -10,7 +10,7 @@
 			<%= f.label :venue %>
 			<%= f.text_field :venue %>
 			<%= f.label :match_date %>
-			<%= f.text_field :match_date, :value => @match.match_date.in_time_zone('Europe/Warsaw').strftime(I18n.t :default, scope: 'date.formats') %>
+			<%= f.text_field :match_date, :value => @match.match_date.strftime(I18n.t :default, scope: 'date.formats') %>
 			<%= f.label :home_team_id %>
 			<%= collection_select(:match, :home_team_id, Team.all.sort_by {|t| t.name}, :id, :name) %>
 			<%= f.label :away_team_id %>

@@ -65,5 +65,6 @@ module Mundial
     config.i18n.enforce_available_locales = false
     
     config.time_zone = 'Europe/Warsaw'
+    config.active_record.default_timezone = :local
   end
 end
