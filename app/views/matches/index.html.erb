@@ -28,7 +28,7 @@
 		<% stage_matches.sort_by {|match| match.match_no}.each do |match| %>
 			<tr>
 				<%= content_tag(:td, match.match_no) %>
-				<%= content_tag(:td, match.match_date.in_time_zone('Europe/Warsaw').to_formatted_s(:short)) %>
+				<%= content_tag(:td, match.match_date.in_time_zone('Europe/Warsaw').strftime(I18n.t :short, scope: 'time.formats')) %>
 				<%= content_tag(:td, match.home_team.name, class: "home_team " + match.home_team_result) %>
 				<%= content_tag(:td, match.result.nil? ? '-' : match.result.home_team_goals_90mins, class: "result") %>
 				<%= content_tag(:td, ':', class: "result") %>
