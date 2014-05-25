@@ -8,16 +8,6 @@
 		<%= render 'layouts/shim' %>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-			    $('.navbar .dropdown').hover(function() {
-			        $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
-			    }, function() {
-			        $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
-			    });
-			})
-		</script>
 	</head>
 	<body>
 		<%= render 'layouts/header' %>

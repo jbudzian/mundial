@@ -38,4 +38,5 @@ heroku logs
 
 heroku run rake assets:reset
 heroku run rake assets:precompile
+heroku restart
 
