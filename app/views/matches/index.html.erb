@@ -39,17 +39,13 @@
 					<% if match.result.nil? %>
 						<%= content_tag(:td, link_to("Set result", new_match_result_path(match), class: "btn btn-default btn-small btn-block"), class: "button-col") %>
 					<% else %>
-						<%= content_tag(:td, link_to("Edit result", edit_match_result_path(match, match.result), class: "btn btn-default btn-small btn-block"), class: "button-col") %>
+						<%= content_tag(:td, link_to("Edit result", edit_match_result_path(match, match.result), class: "btn btn-warning btn-small btn-block"), class: "button-col") %>
 					<% end %>
 				<% else %>
 					<%= content_tag(:td, '') %>
 					<%= content_tag(:td, '') %>
 				<% end %>
-				<% if match.result.nil? %>
-					<%= content_tag(:td, link_to("My bet", edit_bet_path(match), class: "btn btn-primary btn-small btn-block"), class: "button-col") %>
-				<% else %>
-					<td></td>
-				<% end %>
+				<%= content_tag(:td, link_to("My bet", edit_bet_path(match), class: "btn btn-primary btn-small btn-block"), class: "button-col") %>
 			</tr>
 		<% end %>
 	<% end %>

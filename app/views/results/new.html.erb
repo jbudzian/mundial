@@ -13,7 +13,12 @@
 			<%= f.hidden_field :match_id, :value => @result.match.id %>
 			<br />
 			<div class="input-append">
-				<%= f.submit "Submit result", class: "btn btn-large btn-primary" %>
+				<% if Time.now < @result.match.match_date %>
+					<div class="alert alert-danger"><strong>Warning!</strong> You cannot save the result because the match starts in <%= distance_of_time_in_words(Time.now, @result.match.match_date) %>!!! </div>
+					<%= f.submit "Submit result", class: "btn btn-large btn-danger" %>
+				<% else %>
+					<%= f.submit "Submit result", class: "btn btn-large btn-primary" %>
+				<% end %>
 				<%= link_to("Cancel", matches_path, class: "btn btn-large") %>
 			</div>
 		<% end %>
