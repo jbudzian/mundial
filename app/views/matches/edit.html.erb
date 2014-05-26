@@ -2,6 +2,7 @@
 <div class="row">
 	<div class="span6 offset3">
 		<%= form_for(@match) do |f| %>
+			<div class="alert alert-info"><strong>Remember, </strong> all match times are local Warsaw time!</div>
 			<%= render 'shared/error_messages', e: @match %>
 			<%= f.label :match_no %>
 			<%= f.text_field :match_no %>

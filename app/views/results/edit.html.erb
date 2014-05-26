@@ -2,6 +2,7 @@
 <div class="row">
 	<div class="span6 offset3">
 		<%= render 'shared/error_messages', e: @result %>
+		<div class="alert alert-info"><strong>Remember, </strong> all match times are local Warsaw time!</div>
 		<table class="table table-condensed">
 			<tr><%= content_tag(:td, "Match number") %><%= content_tag(:td, @result.match.match_no) %></tr>
 			<tr><%= content_tag(:td, "Tournament stage") %><%= content_tag(:td, @result.match.tournament_stage) %></tr>
