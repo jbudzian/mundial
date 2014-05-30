@@ -14,7 +14,11 @@ class Bet < ActiveRecord::Base
     if match.result.nil?
       nil
     else
-      id # TODO
+      points = 0
+      points += 1 if home_team_goals_90mins == match.result.home_team_goals_90mins and away_team_goals_90mins == match.result.away_team_goals_90mins
+      points += 1 if result_90mins == match.result.result_90mins
+      points += 1 if match.is_playoff and home_team_eliminated == match.result.home_team_eliminated
+      points   
     end
   end
   

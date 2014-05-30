@@ -1,13 +1,23 @@
 <% provide(:title, 'Teams') %> <h1>Teams</h1>
-<table class="teams">
-	<% @teams.group_by(&:group).each do |group, group_teams| %>
-	<tr>
-		<td class="group_name"><%= link_to group, matches_path(anchor: group.gsub(/\s+/, "")) %></td>
-		<% if !group_teams.nil? %>
-			<% group_teams.each do |team| %>
-				<%= content_tag(:td, team.name, class: "team_name") %>
+
+<div class="row">
+	<div class="span12">
+		<table class="table table-condensed teams">
+			<% @teams.group_by(&:group).each do |group, group_teams| %>
+			<tr>
+				<td class="group_name"><%= link_to group, matches_path(anchor: group.gsub(/\s+/, "")) %></td>
+				<% if !group_teams.nil? %>
+					<% group_teams.each do |team| %>
+						<td class="team-flag">
+							<%= image_tag(team.flag_url('48x32'), class: "img-polaroid", style: "display: inline;") %>
+						</td>
+						<td class="team-name">
+							<%= team.name %>
+						</td>
+					<% end %>
+				<% end %>
+			</tr>
 			<% end %>
-		<% end %>
-	</tr>
-	<% end %>
-</table>
+		</table>
+	</div>
+</div>

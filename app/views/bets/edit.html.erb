@@ -4,7 +4,7 @@
 		<%= render 'shared/error_messages', e: @bet %>
 		<%= render 'shared/local_time_info' %>
 		<table class="table table-condensed">
-			<tr class="info"><%= content_tag(:td, "Betting user") %><%= content_tag(:td, @bet.user.name) %></tr>
+			<tr><%= content_tag(:td, "Betting user") %><%= content_tag(:td, @bet.user.name) %></tr>
 			<tr><%= content_tag(:td, "Match number") %><%= content_tag(:td, @bet.match.match_no) %></tr>
 			<tr><%= content_tag(:td, "Tournament stage") %><%= content_tag(:td, @bet.match.tournament_stage) %></tr>
 			<tr><%= content_tag(:td, "Venue") %><%= content_tag(:td, @bet.match.venue) %></tr>
@@ -14,9 +14,11 @@
 			<%= render 'bet_fields', f: f, :locals => {:match => @bet.match} %>
 			<%= f.hidden_field :match_id, :value => @bet.match.id %>
 			<br />
-			<div class="input-append">
+			<% if Time.now > @bet.match.match_date %>
+				<div class="alert alert-danger"> <i class="icon-warning-sign icon-large"></i> <strong>Warning!</strong> You cannot save the bet because the match has started <%= time_ago_in_words(@bet.match.match_date) %> ago!!! </div>
+			<% end %>
+			<div class="form-horizontal">
 				<% if Time.now > @bet.match.match_date %>
-					<div class="alert alert-danger"><i class="icon-warning-sign icon-large"></i> <strong>Warning!</strong> You cannot save the bet because the match has started <%= time_ago_in_words(@result.match.match_date) %>!!! </div>
 					<%= f.submit "Submit bet", class: "btn btn-large btn-danger" %>
 				<% else %>
 					<%= f.submit "Submit bet", class: "btn btn-large btn-primary" %>

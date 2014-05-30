@@ -12,9 +12,11 @@
 		<%= form_for [@match, @result] do |f| %>
 			<%= render 'result_fields', f: f, :locals => {:match => @result.match} %>
 			<br />
-			<div class="input-append">
+			<% if Time.now < @result.match.match_date %>
+				<div class="alert alert-danger"><i class="icon-warning-sign icon-large"></i> <strong>Warning!</strong> You cannot save the result because the match starts in <%= distance_of_time_in_words(Time.now, @result.match.match_date) %>!!! </div>
+			<% end %>
+			<div class="form-horizontal">
 				<% if Time.now < @result.match.match_date %>
-					<div class="alert alert-danger"><i class="icon-warning-sign icon-large"></i> <strong>Warning!</strong> You cannot save the result because the match starts in <%= distance_of_time_in_words(Time.now, @result.match.match_date) %>!!! </div>
 					<%= f.submit "Submit result", class: "btn btn-large btn-danger" %>
 				<% else %>
 					<%= f.submit "Submit result", class: "btn btn-large btn-primary" %>

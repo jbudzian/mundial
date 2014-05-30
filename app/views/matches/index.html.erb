@@ -1,7 +1,7 @@
 <% provide(:title, 'Matches') %> <h1>Matches</h1>
 <div class="center-block">
 	<%= render 'shared/local_time_info' %>
-<table class="table table-hover">
+<table class="table">
 	<% @matches.group_by(&:tournament_stage).each do |stage, stage_matches| %>
 	<tr>
 		<th colspan="10"></th>

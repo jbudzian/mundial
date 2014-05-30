@@ -1,16 +1,18 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-	<aside class="span4">
+	<div class="span3">
 		<section>
-			<h1>
-				<%= gravatar_for @user %>
-				<%= @user.name %>
-			</h1>
+			<%= gravatar_for @user %>
 		</section>
-	</aside>
-	<div class="span8">
+		<section>
+			<h3>
+				<%= @user.name %>
+			</h3>
+		</section>
+	</div>
+	<div class="span9">
 		<% if @bets.any? %>
-		<h3>Bets <span class="badge"><%= @bets.count %></span></h3>
+		<h3>Bets <sup class="badge"> <%= @bets.count %> </sup></h3>
 		<table class="table table-condensed">
 			<tr>
 				<%= content_tag(:th, "Match No", rowspan: "2") %>

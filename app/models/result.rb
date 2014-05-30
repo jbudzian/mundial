@@ -10,19 +10,29 @@ class Result < ActiveRecord::Base
   validate :result_cannot_be_set_before_match_start
 
   def result_90mins_string
+    {ApplicationHelper::DRAW => "Draw",
+      ApplicationHelper::HOME_TEAM_WIN => match.home_team.name,
+      ApplicationHelper::AWAY_TEAM_WIN => match.away_team.name}[result_90mins]
+  end
+  
+  def result_90mins
     if home_team_goals_90mins < away_team_goals_90mins
-      match.away_team.name
+      ApplicationHelper::AWAY_TEAM_WIN
     elsif home_team_goals_90mins > away_team_goals_90mins
-      match.home_team.name
+      ApplicationHelper::HOME_TEAM_WIN
     else
-      "Draw"
+      ApplicationHelper::DRAW
     end
+  end
+  
+  def home_team_eliminated
+    result_full_time == ApplicationHelper::AWAY_TEAM_WIN
   end
   
   def team_to_advance_string
     if match.is_playoff
-      raise "unexpected DRAW in a playoff game!!!" if match.result_full_time == ApplicationHelper::DRAW
-      match.result_full_time
+      raise "unexpected DRAW in a playoff game!!!" if match.result.result_full_time == ApplicationHelper::DRAW
+      match.result.result_full_time
     else
       'n/a'
     end

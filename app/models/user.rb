@@ -27,8 +27,19 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   def current_score
-    rand(55) # TODO
     bets.map{|a| a.points_awarded.nil? ? 0 : a.points_awarded}.sum
+  end
+  
+  def available_score
+    Result.all.map{|r| r.match.is_playoff ? 3 : 2}.sum
+  end
+  
+  def current_score_percent_total
+    100 * current_score / 144
+  end
+  
+  def current_score_percent_available
+    100 * (available_score - current_score) / 144
   end
   
 private

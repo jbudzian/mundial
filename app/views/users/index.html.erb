@@ -1,13 +1,22 @@
-<% provide(:title, 'Leaderboard') %>
-<h1>Leaderboard</h1>
+<% provide(:title, 'Leaderboard') %> <h1>Leaderboard</h1>
 
-<ul class="leaderboard">
-  <% @users.each do |user| %>
-    <li>
-      	<%= gravatar_for user, 48 %>
-    	<%= content_tag(:span, user.current_place, class: "place") %>
-      	<%= content_tag(:span, "#{user.current_score} point(s)   ") %>
-      	<%= link_to user.name, user %>
-    </li>
-  <% end %>
-</ul>
+<div class="row">
+	<div class="span7 offset2">
+		<table class="table">
+			<% @users.each do |user| %>
+			<tr>
+				<%= content_tag(:td, user.current_place, class: "place", rowspan: "2") %>
+				<%= content_tag(:td, link_to(gravatar_for(user, 80), user), rowspan: "2", width: "80") %>
+				<%= content_tag(:td, link_to(user.name, user)) %>
+				<%= content_tag(:td, "#{user.current_score} point(s)") %>
+			</tr>
+			<tr>
+				<td class="progress progress-striped active" colspan="2">
+					<%= content_tag(:div, '', class: "bar", style: "width: #{user.current_score_percent_total}%; background-color: #294d7a;") %>
+					<%= content_tag(:div, '', class: "bar bar-warning", style: "width: #{user.current_score_percent_available}%; background-color: #72afe5;") %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

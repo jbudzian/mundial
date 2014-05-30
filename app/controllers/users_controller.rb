@@ -14,7 +14,11 @@ class UsersController < ApplicationController
       else
         lastScore = usr.current_score
         lastIndex += 1
-        usr.current_place = "##{lastIndex}"
+        if lastIndex == 100
+          usr.current_place = "\u2460"
+        else
+          usr.current_place = "#{lastIndex}"
+        end
       end
     end
     @users = allUsers

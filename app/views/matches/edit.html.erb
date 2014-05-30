@@ -16,7 +16,7 @@
 			<%= collection_select(:match, :home_team_id, Team.all.sort_by {|t| t.name}, :id, :name) %>
 			<%= f.label :away_team_id %>
 			<%= collection_select(:match, :away_team_id, Team.all.sort_by {|t| t.name}, :id, :name) %>
-			<div class="input-append">
+			<div class="form-horizontal">
 				<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
 				<%= link_to("Cancel", matches_path, class: "btn btn-large") %>
 			</div>
