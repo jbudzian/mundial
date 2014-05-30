@@ -7,7 +7,8 @@ class Match < ActiveRecord::Base
   has_one :result
   
   validates :match_no, :numericality => {:only_integer => true}
-  validates :match_date, :match_no, :tournament_stage, :venue, :is_playoff, presence: true
+  validates :match_date, :match_no, :tournament_stage, :venue, presence: true
+  validates_inclusion_of :is_playoff, :in => [true, false]
   
   # returns appropriate CSS style for home team result
   def home_team_result
