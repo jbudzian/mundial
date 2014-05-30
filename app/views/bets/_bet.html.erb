@@ -1,0 +1,42 @@
+<tr class="match-header">
+	<%= content_tag(:td, bet.match.match_no) %>
+	<%= content_tag(:td, bet.match.home_team.name) %>
+	<%= content_tag(:td, bet.match.away_team.name) %>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, '') %>
+</tr>
+<tr>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, content_tag(:span, 'Result', class: "label label-info"), class: "right-align") %>
+	<% if !bet.match.result.nil? %>
+		<%= content_tag(:td, "#{bet.match.result.home_team_goals_90mins} : #{bet.match.result.away_team_goals_90mins}") %>
+		<%= content_tag(:td, bet.match.result.result_90mins_string) %>
+		<%= content_tag(:td, bet.match.result.team_to_advance_string) %>
+		<%= content_tag(:td, '') %>
+	<% else %>
+		<%= content_tag(:td, 'No result posted', colspan: "4") %>
+	<% end %>
+</tr>
+<tr>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, '') %>
+	<%= content_tag(:td, content_tag(:span, 'Bet', class: "label label-info"), class: "right-align") %>
+	<% if bet.user == current_user or !bet.match.result.nil? %>
+		<%= content_tag(:td, "#{bet.home_team_goals_90mins} : #{bet.away_team_goals_90mins}") %>
+		<%= content_tag(:td, bet.result_90mins_string) %>
+		<% if !bet.home_team_eliminated.nil? %>
+			<%= content_tag(:td, bet.home_team_eliminated ? bet.match.away_team.name : bet.match.home_team.name ) %>
+		<% else %>
+			<%= content_tag(:td, "n/a" ) %>
+		<% end %>
+		<%= content_tag(:td, bet.points_awarded ) %>
+	<% else %>
+		<%= content_tag(:td, '***') %>
+		<%= content_tag(:td, '***') %>
+		<%= content_tag(:td, '***') %>
+		<%= content_tag(:td, '') %>
+	<% end %>
+</tr>

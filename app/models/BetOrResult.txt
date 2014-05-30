@@ -46,3 +46,19 @@ heroku run rake assets:reset
 heroku run rake assets:precompile
 heroku restart
 
+**********************
+
+The bootstrap “dropdown open” toggle does not work properly in development, but works in production
+
+(...)
+
+(Rails 3.2) I solved this problem by removing locally precompiled assets -- it would work fine in Heroku/Prod but would open and close instantly in dev.
+rake assets:clean
+
+**********************
+
+
+
+
+
+

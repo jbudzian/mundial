@@ -3,11 +3,12 @@ class Match < ActiveRecord::Base
   
   belongs_to :home_team, class_name: "Team", foreign_key: "home_team_id"
   belongs_to :away_team, class_name: "Team", foreign_key: "away_team_id"
-  has_many :bet
+  has_many :bets
   has_one :result
   
   validates :match_no, :numericality => {:only_integer => true}
   
+  # returns appropriate CSS style for home team result
   def home_team_result
     if self.result.nil?
       ''
@@ -22,6 +23,7 @@ class Match < ActiveRecord::Base
     end
   end
   
+  # returns appropriate CSS style for away team result
   def away_team_result
     if self.result.nil?
       ''
@@ -34,6 +36,10 @@ class Match < ActiveRecord::Base
         ''
       end
     end
+  end
+
+  def user_has_bet? user
+    bets.where(:user_id => user.id).count > 0
   end
   
 end

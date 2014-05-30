@@ -178,7 +178,7 @@ input, textarea, select, .uneditable-input {
   span.place {
     font-size: x-large;
     font-weight: bolder;
-    text-shadow: 5px 5px 5px gold;
+    text-shadow: 5px 5px 5px $sollersGreen;
   }
 }
 
@@ -204,7 +204,6 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-
 /* matches index */
 .table {
   // table {
@@ -214,6 +213,11 @@ input, textarea, select, .uneditable-input {
     // margin-left:auto; 
     // margin-right:auto;
   // }
+  tr {
+    &.match-header {
+      color: $sollersBlue3;
+    }
+  }
   td.stage_name {
     padding: 10px 50px;
     font-weight: bolder;
@@ -266,7 +270,13 @@ input, textarea, select, .uneditable-input {
       padding: 0px 0px 0px 5px;
       text-align: right;
     }
+
+    &.right-align {
+      text-align: right;
+    }
+    
   }
+
 // 
   // td.away_team {
     // padding: 5px;

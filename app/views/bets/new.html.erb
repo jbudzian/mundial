@@ -2,13 +2,13 @@
 <div class="row">
 	<div class="span6 offset3">
 		<%= render 'shared/error_messages', e: @bet %>
-		<div class="alert alert-info"><strong>Remember, </strong> all match times are local Warsaw time!</div>
+		<%= render 'shared/local_time_info' %>
 		<table class="table table-condensed">
 			<tr class="info"><%= content_tag(:td, "Betting user") %><%= content_tag(:td, @bet.user.name) %></tr>
 			<tr><%= content_tag(:td, "Match number") %><%= content_tag(:td, @bet.match.match_no) %></tr>
 			<tr><%= content_tag(:td, "Tournament stage") %><%= content_tag(:td, @bet.match.tournament_stage) %></tr>
 			<tr><%= content_tag(:td, "Venue") %><%= content_tag(:td, @bet.match.venue) %></tr>
-			<tr><%= content_tag(:td, "Match date") %><%= content_tag(:td, @bet.match.match_date.in_time_zone('Europe/Warsaw').strftime(I18n.t :default, scope: 'date.formats')) %></tr>
+			<tr><%= content_tag(:td, "Match date") %><%= content_tag(:td, @bet.match.match_date.strftime(I18n.t :default, scope: 'date.formats')) %></tr>
 		</table>
 		<%= form_for [@bet] do |f| %>
 			<%= render 'bet_fields', f: f, :locals => {:match => @bet.match} %>
@@ -16,7 +16,7 @@
 			<br />
 			<div class="input-append">
 				<% if Time.now > @bet.match.match_date %>
-					<div class="alert alert-danger"><strong>Warning!</strong> You cannot save the bet because the match has started <%= time_ago_in_words(@bet.match.match_date) %> ago!!! </div>
+					<div class="alert alert-danger"><i class="icon-warning-sign icon-large"></i> <strong>Warning!</strong> You cannot save the bet because the match has started <%= time_ago_in_words(@bet.match.match_date) %> ago!!! </div>
 					<%= f.submit "Submit bet", class: "btn btn-large btn-danger" %>
 				<% else %>
 					<%= f.submit "Submit bet", class: "btn btn-large btn-primary" %>

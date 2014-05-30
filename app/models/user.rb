@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   include Gravtastic
   gravtastic
   has_secure_password
+
+  has_many :bets, dependent: :destroy
   
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -25,10 +27,8 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   def current_score
-    if @current_score.nil?
-      @current_score = rand(55)
-    end
-    @current_score
+    rand(55) # TODO
+    bets.map{|a| a.points_awarded.nil? ? 0 : a.points_awarded}.sum
   end
   
 private

@@ -2,18 +2,23 @@
 <div class="row">
 	<div class="span6 offset3">
 		<%= render 'shared/error_messages', e: @result %>
-		<div class="alert alert-info"><strong>Remember, </strong> all match times are local Warsaw time!</div>
+		<%= render 'shared/local_time_info' %>
 		<table class="table table-condensed">
 			<tr><%= content_tag(:td, "Match number") %><%= content_tag(:td, @result.match.match_no) %></tr>
 			<tr><%= content_tag(:td, "Tournament stage") %><%= content_tag(:td, @result.match.tournament_stage) %></tr>
 			<tr><%= content_tag(:td, "Venue") %><%= content_tag(:td, @result.match.venue) %></tr>
-			<tr><%= content_tag(:td, "Match date") %><%= content_tag(:td, @result.match.match_date.in_time_zone('Europe/Warsaw').strftime(I18n.t :default, scope: 'date.formats')) %></tr>
+			<tr><%= content_tag(:td, "Match date") %><%= content_tag(:td, @result.match.match_date.strftime(I18n.t :default, scope: 'date.formats')) %></tr>
 		</table>
 		<%= form_for [@match, @result] do |f| %>
 			<%= render 'result_fields', f: f, :locals => {:match => @result.match} %>
 			<br />
 			<div class="input-append">
-				<%= f.submit "Submit result", class: "btn btn-large btn-primary" %>
+				<% if Time.now < @result.match.match_date %>
+					<div class="alert alert-danger"><i class="icon-warning-sign icon-large"></i> <strong>Warning!</strong> You cannot save the result because the match starts in <%= distance_of_time_in_words(Time.now, @result.match.match_date) %>!!! </div>
+					<%= f.submit "Submit result", class: "btn btn-large btn-danger" %>
+				<% else %>
+					<%= f.submit "Submit result", class: "btn btn-large btn-primary" %>
+				<% end %>
 				<%= link_to("Cancel", matches_path, class: "btn btn-large") %>
 			</div>
 		<% end %>

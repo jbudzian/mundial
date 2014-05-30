@@ -8,4 +8,25 @@
 			</h1>
 		</section>
 	</aside>
+	<div class="span8">
+		<% if @bets.any? %>
+		<h3>Bets <span class="badge"><%= @bets.count %></span></h3>
+		<table class="table table-condensed">
+			<tr>
+				<%= content_tag(:th, "Match No", rowspan: "2") %>
+				<%= content_tag(:th, "Teams", colspan: "2") %>
+				<%= content_tag(:th, "After 90 minutes", colspan: "2") %>
+				<%= content_tag(:th, "Team to advance", rowspan: "2" ) %>
+				<%= content_tag(:th, "Points", rowspan: "2" ) %>
+			</tr>
+			<tr>
+				<%= content_tag(:th, "Home") %>
+				<%= content_tag(:th, "Away") %>
+				<%= content_tag(:th, "Goals") %>
+				<%= content_tag(:th, "Result") %>
+			</tr>
+			<%= render @bets %>
+		</table>
+		<% end %>
+	</div>
 </div>

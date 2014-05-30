@@ -8,7 +8,26 @@ class Result < ActiveRecord::Base
   validates :result_full_time, :numericality => {:only_integer => true}
   
   validate :result_cannot_be_set_before_match_start
+
+  def result_90mins_string
+    if home_team_goals_90mins < away_team_goals_90mins
+      match.away_team.name
+    elsif home_team_goals_90mins > away_team_goals_90mins
+      match.home_team.name
+    else
+      "Draw"
+    end
+  end
   
+  def team_to_advance_string
+    if match.is_playoff
+      raise "unexpected DRAW in a playoff game!!!" if match.result_full_time == ApplicationHelper::DRAW
+      match.result_full_time
+    else
+      'n/a'
+    end
+  end
+    
   private
   
   def result_cannot_be_set_before_match_start
