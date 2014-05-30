@@ -209,7 +209,7 @@ stages = [
       match = Match.new(match_date: match_date, match_no: tokens[0], tournament_stage: stage, venue: tokens[4], is_playoff: playoffs)
       match.home_team = home_team
       match.away_team = away_team
-      if not match.save
+      if not match.save!
         puts match.errors.full_messages        
         raise "Failed to create Match!" 
       end
