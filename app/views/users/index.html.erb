@@ -8,12 +8,13 @@
 				<%= content_tag(:td, user.current_place, class: "place", rowspan: "2") %>
 				<%= content_tag(:td, link_to(gravatar_for(user, 80), user), rowspan: "2", width: "80") %>
 				<%= content_tag(:td, link_to(user.name, user)) %>
-				<%= content_tag(:td, "#{user.current_score} point(s)") %>
+				<%= content_tag(:td, "#{pluralize(user.current_score, 'point')}") %>
+				<%= content_tag(:td, "#{user.current_score_percent_available}%") %>
 			</tr>
 			<tr>
-				<td class="progress progress-striped active" colspan="2">
+				<td class="progress progress-striped active" colspan="3">
 					<%= content_tag(:div, '', class: "bar", style: "width: #{user.current_score_percent_total}%; background-color: #294d7a;") %>
-					<%= content_tag(:div, '', class: "bar bar-warning", style: "width: #{user.current_score_percent_available}%; background-color: #72afe5;") %>
+					<%= content_tag(:div, '', class: "bar", style: "width: #{user.available_score_percent_total - user.current_score_percent_total}%; background-color: #72afe5;") %>
 				</td>
 			</tr>
 			<% end %>

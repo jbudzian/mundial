@@ -39,7 +39,15 @@ class User < ActiveRecord::Base
   end
   
   def current_score_percent_available
-    100 * (available_score - current_score) / 144
+    if available_score > 0
+      100 * current_score / available_score
+    else
+      0
+    end
+  end
+  
+  def available_score_percent_total
+    100 * available_score / 144
   end
   
 private

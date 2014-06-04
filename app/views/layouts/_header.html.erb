@@ -37,7 +37,9 @@
 					</li>
 					<% else %>
 					<li>
-						<%= link_to "Sign in", signin_path %>
+						<%= link_to signin_path do %>
+						    <i class="icon-user icon-white"></i> Sign in
+						<% end %>
 					</li>
 					<% end %>
 				</ul>

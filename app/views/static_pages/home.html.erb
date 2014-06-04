@@ -1,9 +1,14 @@
 <div class="center hero-unit">
 <h1>Welcome to Mundial Tournament by Sollers!</h1>
-<h2>
-This is the home page for the Mundial Tournament.
-</h2>
-<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+<h1>
+	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+</h1>
+Or
+<h3>
+	<%= link_to signin_path, class: "btn btn-default" do %>
+	    <i class="icon-user"></i> Sign in
+	<% end %>
+</h3>
 </div>
 <%= link_to image_tag("logo.png", alt: "Sollers Consulting"), 'http://www.sollers.pl/' %>
 <br />

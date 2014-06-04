@@ -9,7 +9,10 @@
 			<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
 		<% end %>
 		<p>
-			New user? <%= link_to "Sign up now!", signup_path %>
+			New user?
+			<%= link_to signup_path, class: "btn btn-default" do %>
+			    <i class="icon-user"></i> Sign up now!
+			<% end %>
 		</p>
 	</div>
 </div>
