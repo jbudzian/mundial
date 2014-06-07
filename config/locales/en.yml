@@ -6,6 +6,11 @@ en:
     attributes:
       user:
         password_digest: "Password"
+      bet:
+        away_team_goals_90mins: "Away team's goals after 90 minutes"
+        home_team_goals_90mins: "Home team's goals after 90 minutes"
+        home_team_eliminated: "Team to advance"
+        result_90mins: "Result after 90 minutes"
   date:
     formats:
       # Use the strftime parameters for formats.

@@ -32,7 +32,7 @@ class Result < ActiveRecord::Base
   def team_to_advance_string
     if match.is_playoff
       raise "unexpected DRAW in a playoff game!!!" if match.result.result_full_time == ApplicationHelper::DRAW
-      match.result.result_full_time
+      match.result.result_full_time == ApplicationHelper::HOME_TEAM_WIN ? match.home_team.name : match.away_team.name
     else
       'n/a'
     end

@@ -8,12 +8,12 @@
 		["Draw", ApplicationHelper::DRAW],
 		[locals[:match].home_team.name, ApplicationHelper::HOME_TEAM_WIN],
 		[locals[:match].away_team.name, ApplicationHelper::AWAY_TEAM_WIN]
-	], f.object.result_90mins), :autocomplete => "off" %>
+	], f.object.result_90mins), :autocomplete => "off", :include_blank => '' %>
 <% if locals[:match].is_playoff? %>
 	<%= f.label :home_team_eliminated, "Team to Advance" %>
 	<%= f.select :home_team_eliminated, options_for_select(
 		[
 			["#{locals[:match].home_team.name} goes through", false],
 			["#{locals[:match].away_team.name} goes through", true]
-		]) %>
+		]), :include_blank => '' %>
 <% end %>
