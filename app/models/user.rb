@@ -9,6 +9,7 @@
 #  updated_at :datetime        not null
 #
 class User < ActiveRecord::Base
+  include AuthHelper
   attr_accessible :email, :name, :password, :password_confirmation
   attr_accessor :current_place
   include Gravtastic
@@ -35,6 +36,11 @@ class User < ActiveRecord::Base
     finalBets.map{|bet| bet.match.is_playoff ? 3 : 2}.sum
   end
   
+  def available_bets_count
+    finalBets = bets.select { |bet| not bet.match.result.nil? }
+    finalBets.count
+  end
+  
   def current_score_percent_total
     100 * current_score / 144
   end
@@ -51,9 +57,29 @@ class User < ActiveRecord::Base
     100 * available_score / 144
   end
   
+  def password_reset
+    @new_password = set_random_password()
+    UserMailer.reset_password_email(self, @new_password).deliver
+  end
+
 private
 
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
   end
+  
+  def set_random_password
+    @new_password = self.generate_random_password()
+    self.password = @new_password
+    self.password_confirmation = @new_password
+    if self.save
+      @new_password
+    else
+      self.errors.full_messages.each do |err|
+        puts err
+      end
+      raise "There were errors! (See logs above.)"
+    end
+  end
+  
 end

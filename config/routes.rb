@@ -6,6 +6,7 @@ Mundial::Application.routes.draw do
     resources :results, only: [:new, :create, :edit, :update]
   end
   resources :bets, only: [:new, :create, :edit, :update]
+  resources :reset_password, only: [:new, :create]
 
   root to: 'static_pages#home'
   
@@ -15,6 +16,8 @@ Mundial::Application.routes.draw do
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  
+  match '/resetpassword', to: 'reset_password#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

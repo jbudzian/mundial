@@ -27,6 +27,7 @@ bundle exec rspec spec/
 bundle exec rake db:migrate
 bundle exec rake db:test:prepare
 bundle exec rake assets:precompile
+rake assets:clean
 
 git add .
 git commit -m "Finish user signup"

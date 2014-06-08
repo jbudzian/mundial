@@ -1,15 +1,15 @@
 <% provide(:title, 'Leaderboard') %> <h1>Leaderboard</h1>
 
 <div class="row">
-	<div class="span7 offset2">
-		<table class="table">
+	<div class="span9 offset1">
+		<table class="table" class="leaderboard">
 			<% @users.each do |user| %>
 			<tr>
 				<%= content_tag(:td, user.current_place, class: "place", rowspan: "2") %>
 				<%= content_tag(:td, link_to(gravatar_for(user, 80), user), rowspan: "2", width: "80") %>
 				<%= content_tag(:td, link_to(user.name, user)) %>
-				<%= content_tag(:td, "#{pluralize(user.current_score, 'point')}") %>
-				<%= content_tag(:td, "#{user.current_score_percent_available}%") %>
+				<%= content_tag(:td, "#{pluralize(user.current_score, 'point')}", class: "points") %>
+				<%= content_tag(:td, "#{user.current_score_percent_available}% for #{pluralize(user.available_bets_count, 'bet')}") %>
 			</tr>
 			<tr>
 				<td class="progress progress-striped active" colspan="3">

@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'dotenv-rails', :groups => [:development, :test]
 gem 'rails', '3.2.3'
 gem 'bootstrap-sass', '2.3.2'
 gem 'bcrypt-ruby', '3.0.1'
