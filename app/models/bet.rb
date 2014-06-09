@@ -7,9 +7,9 @@ class Bet < ActiveRecord::Base
   validates :away_team_goals_90mins, :numericality => {:only_integer => true}
   validates :home_team_goals_90mins, :numericality => {:only_integer => true}
   validates :result_90mins, :numericality => {:only_integer => true, :message => "cannot be blank"}
-  validates :home_team_eliminated, :inclusion => {:in => [true, false], :message => "cannot be blank"}
 
   validate :bet_cannot_be_saved_after_match_start
+  validate :team_to_advance_cannot_be_blank
   
   def points_awarded
     if match.result.nil?
@@ -38,6 +38,12 @@ class Bet < ActiveRecord::Base
   def bet_cannot_be_saved_after_match_start
     if match.match_date < Time.now
       errors[:base] << "This bet cannot be saved because the match has started in the past!"
+    end
+  end
+  
+  def team_to_advance_cannot_be_blank
+    if match.is_playoff and self.home_team_eliminated.nil?
+      errors[:home_team_eliminated] << 'Team to advance cannot be blank'
     end
   end
 end
