@@ -50,6 +50,8 @@ heroku run rake db:setup
 
 **********************
 
+bundle exec rake routes
+
 The bootstrap “dropdown open” toggle does not work properly in development, but works in production
 
 (...)

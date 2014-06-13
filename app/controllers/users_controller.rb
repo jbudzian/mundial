@@ -5,20 +5,18 @@ class UsersController < ApplicationController
   before_filter :ensure_correct_user, only: [:edit, :update]
   
   def index
-    allUsers = User.all.sort_by {|usr| -usr.current_score}
-    lastIndex = 0
+    allUsers = User.all.sort do |a, b|
+      [-a.current_score, a.name.downcase] <=> [-b.current_score, b.name.downcase]
+    end
+    index = 0
     lastScore = -1
     allUsers.each do |usr|
+      index += 1
       if usr.current_score == lastScore
         usr.current_place = '-'
       else
         lastScore = usr.current_score
-        lastIndex += 1
-        if lastIndex == 100
-          usr.current_place = "\u2460"
-        else
-          usr.current_place = "#{lastIndex}"
-        end
+        usr.current_place = "#{index}"
       end
     end
     @users = allUsers
