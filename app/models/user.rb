@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   include Gravtastic
   gravtastic
   has_secure_password
+  require 'set'
 
   has_many :bets, dependent: :destroy
   
@@ -28,16 +29,16 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   def current_score
-    bets.map{|a| a.points_awarded.nil? ? 0 : a.points_awarded}.sum
+    valid_bets.map{|a| a.points_awarded.nil? ? 0 : a.points_awarded}.sum
   end
   
   def available_score
-    finalBets = bets.select { |bet| not bet.match.result.nil? }
+    finalBets = valid_bets.select { |bet| not bet.match.result.nil? }
     finalBets.map{|bet| bet.match.is_playoff ? 3 : 2}.sum
   end
   
   def available_bets_count
-    finalBets = bets.select { |bet| not bet.match.result.nil? }
+    finalBets = valid_bets.select { |bet| not bet.match.result.nil? }
     finalBets.count
   end
   
@@ -60,6 +61,18 @@ class User < ActiveRecord::Base
   def password_reset
     @new_password = set_random_password()
     UserMailer.reset_password_email(self, @new_password).deliver
+  end
+  
+  def valid_bets
+    @valid_bets = Array.new
+    @used_matches = Set.new
+    bets.sort{ |a,b| b[:updated_at] <=> a[:updated_at] }.each do |bet|
+      if not @used_matches.include? bet.match.id
+        @valid_bets.push bet
+        @used_matches.add bet.match.id
+      end
+    end
+    @valid_bets
   end
 
 private

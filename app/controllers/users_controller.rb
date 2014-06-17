@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @bets = @user.bets.sort_by{ |b| b.match.match_no }
+    @bets = @user.valid_bets.sort_by{ |b| b.match.match_no }
   end
 
   def new
