@@ -10,13 +10,14 @@
 <tr>
 	<%= content_tag(:td, '') %>
 	<%= content_tag(:td, '') %>
-	<%= content_tag(:td, content_tag(:span, 'Result', class: "label label-info"), class: "right-align") %>
 	<% if !bet.match.result.nil? %>
+		<%= content_tag(:td, content_tag(:span, 'Result', class: "label label-info"), class: "right-align") %>
 		<%= content_tag(:td, "#{bet.match.result.home_team_goals_90mins} : #{bet.match.result.away_team_goals_90mins}") %>
 		<%= content_tag(:td, bet.match.result.result_90mins_string) %>
 		<%= content_tag(:td, bet.match.result.team_to_advance_string) %>
 		<%= content_tag(:td, '') %>
 	<% else %>
+		<%= content_tag(:td, content_tag(:span, 'Result', class: "label"), class: "right-align") %>
 		<%= content_tag(:td, 'No result posted', colspan: "4") %>
 	<% end %>
 </tr>

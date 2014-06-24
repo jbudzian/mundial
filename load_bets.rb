@@ -1,5 +1,6 @@
 #
-file_path = "bets_wzd_1.csv"
+#file_path = "bets_wzd_1.csv"
+file_path = "bets_ewa_1.csv"
 
 puts "Opening #{file_path} file"
 puts 'Expected file format:'
@@ -41,11 +42,11 @@ if File.exists?(file_path)
     
     # find bet
     #bet = Bet.find_by match: match, user: user
-    bet = Bet.find(:first, :conditions => { :match_id => match.id })
-    if bet.nil?
-      puts "Creating new bet"
-      bet = Bet.new
+    bet = Bet.find(:first, :conditions => { :match_id => match.id, :user_id => user.id })
+    if not bet.nil?
+      raise "Bet was found! Cannot continue."
     end
+    bet = Bet.new
     
     # user
     bet.user = user
