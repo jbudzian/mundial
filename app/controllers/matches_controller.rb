@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
   before_filter :ensure_admin_user, only: [:edit, :update]
   
   def index
-    @matches = Match.all
+    @matches = Match.all.sort_by{ |m| m.match_no }
   end
   
   def edit
