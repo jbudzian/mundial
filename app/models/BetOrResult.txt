@@ -61,7 +61,7 @@ rake assets:clean
 
 **********************
 
-
+load ./load_bets.rb
 
 
 
