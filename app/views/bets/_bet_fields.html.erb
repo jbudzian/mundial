@@ -15,5 +15,5 @@
 		[
 			["#{locals[:match].home_team.name} goes through", false],
 			["#{locals[:match].away_team.name} goes through", true]
-		]), :include_blank => '' %>
+		], f.object.home_team_eliminated), :autocomplete => "off", :include_blank => '' %>
 <% end %>
