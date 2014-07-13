@@ -1,6 +1,7 @@
 #
 #file_path = "bets_wzd_1.csv"
-file_path = "bets_ewa_1.csv"
+#file_path = "bets_ewa_1.csv"
+file_path = "bets_wzd_2.csv"
 
 puts "Opening #{file_path} file"
 puts 'Expected file format:'
